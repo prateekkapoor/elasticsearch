@@ -1,0 +1,24 @@
+
+elastic search
+https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-elasticsearch-on-ubuntu-16-04
+http://localhost:9200/
+
+Kibana
+https://community.hortonworks.com/articles/87749/metron-installing-elasticsearch-and-kibana-on-ubun.html
+
+http://localhost:5601/app/kibana#/dev_tools/console?_g=()
+
+Java API
+https://www.elastic.co/guide/en/elasticsearch/client/java-api/current/java-search.html
+
+tutorial
+https://www.elastic.co/blog/found-elasticsearch-top-down
+
+document
+https://www.elastic.co/guide/en/elasticsearch/reference/current/getting-started.html
+
+--putting bulk data
+curl -H "Content-Type: application/json" -XPOST "localhost:9200/bank/_doc/_bulk?pretty&refresh" --data-binary "@accounts.json"
+curl -H "Content-Type: application/json" -XPOST "localhost:9200/bank/_doc/_bulk?pretty&refresh" --data-binary "@test-data.json"
+curl "localhost:9200/_cat/indices?v"
+

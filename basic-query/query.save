@@ -1,0 +1,132 @@
+GET _search
+{
+  "query": {
+    "match_all": {}
+  }
+}
+
+PUT /customer?pretty
+GET /_cat/indices?v
+
+PUT /customer/_doc/1?pretty
+{
+  "name": "John Doe"
+}
+
+
+GET /customer/_doc/1?pretty
+
+POST /customer/_doc/1/_update?pretty
+{
+  "doc": { "name": "Jane Doe", "age": 20 }
+}
+
+POST /customer/_doc/1/_update?pretty
+{
+  "script" : "ctx._source.age += 5"
+}
+
+GET /bank/_search
+{
+  "query": {"match_all": {}},
+  "sort": [
+    {
+      "account_number": {
+        "order": "desc"
+      }
+    }
+  ]
+}
+
+
+GET /bank/_search
+{
+  "query": {"match_all": {}},
+  "size": 1, 
+  "sort": [
+    {
+      "account_number": {
+        "order": "desc"
+      }
+    }
+  ]
+}
+
+
+
+GET /bank/_search
+{
+  "query": {"match_all": {}},
+  "_source": ["account_number","balance"]
+}
+
+
+GET /bank/_search
+{
+  "query": {"match": {
+    "account_number": "20"
+  }}
+}
+
+GET /bank/_search
+{
+  "query": {"match": {
+    "address": "mill"
+  }}
+}
+
+GET /bank/_search
+{
+  "query": {"match": {
+    "address": "mill lane"
+  }}
+}
+
+GET /bank/_search
+{
+  "query": {"match_phrase": {
+    "address": "mill lane"
+  }}
+}
+
+GET /bank/_search
+{
+  "query": {
+    "bool": {
+      "must": [
+          {"match": {"address": "mill"}},
+          {"match": {"address": "lane"}}
+            
+      ]
+    }  
+  }
+}
+
+GET /bank/_search
+{
+  "query": {
+    "bool": {
+      "should": [
+          {"match": {"address": "mill"}},
+          {"match": {"address": "lane"}}
+            
+      ]
+    }  
+  }
+}
+
+
+GET /bank/_search
+{
+  "query": {
+    "bool": {
+      "must": [
+        { "match": { "age": "40" } }
+      ],
+      "must_not": [
+        { "match": { "state": "ID" } }
+      ]
+    }
+  }
+}
+
